@@ -1,15 +1,11 @@
 # frozen_string_literal: true
-# name: discourse-chatbot
-# about: a plugin that allows you to have a conversation with a configurable chatbot in Discourse Chat, Topics and Private Messages
-# version: 0.13
-# authors: merefield
-# url: https://github.com/merefield/discourse-chatbot
+# name: discourse_ai-bot-plugin
 
 gem "httparty", '0.21.0'
 gem "ruby-openai", '3.4.0', { require: false }
 
 module ::DiscourseChatbot
-  PLUGIN_NAME = "discourse-chatbot"
+  PLUGIN_NAME = "discourse_ai-bot-plugin"
   POST = "post"
   MESSAGE = "message"
   CHATBOT_QUERIES_CUSTOM_FIELD = "chatbot_queries"
@@ -25,7 +21,7 @@ register_svg_icon 'robot'
 after_initialize do
   SeedFu.fixture_paths << Rails
     .root
-    .join("plugins", "discourse-chatbot", "db", "fixtures")
+    .join("plugins", "discourse_ai-bot-plugin", "db", "fixtures")
     .to_s
 
   %w(

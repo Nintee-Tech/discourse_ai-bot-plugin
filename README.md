@@ -1,4 +1,4 @@
-# discourse-chatbot
+# discourse_ai-bot-plugin
 
 A plugin that uses a cloud-based chatbot to provide a useful interactive ai experience.
 
