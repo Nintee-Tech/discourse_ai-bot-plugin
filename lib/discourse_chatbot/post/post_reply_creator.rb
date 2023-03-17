@@ -2,8 +2,9 @@
 module ::DiscourseChatbot
   class PostReplyCreator < ReplyCreator
 
-    def initialize(options = {})
+    def initialize(options = {}, post = nil)
       super(options)
+      @post = post
     end
 
     def create
@@ -25,5 +26,14 @@ module ::DiscourseChatbot
           Rails.logger.error ("AI Bot: There was a problem: #{e}")
         end
     end
+
+    def create_reply
+      # Use the post content here
+      post_content = @post.content
+
+      # Include the bot's tag in the reply
+      reply_text = "#{post_content} @bot_name"
+    end
+
   end
 end

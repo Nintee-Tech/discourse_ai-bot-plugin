@@ -62,7 +62,8 @@ class ::Jobs::ChatbotReplyJob < Jobs::Base
     end
     opts.merge!(message_body: message_body)
     if type == ::DiscourseChatbot::POST
-      reply_creator = ::DiscourseChatbot::PostReplyCreator.new(opts)
+      post = Post.find(opts[:reply_to_message_or_post_id])
+      reply_creator = ::DiscourseChatbot::PostReplyCreator.new(opts, post)
     else
       reply_creator = ::DiscourseChatbot::MessageReplyCreator.new(opts)
     end

@@ -42,7 +42,8 @@ module ::DiscourseChatbot
 
       human_participants_count = (existing_human_participants << user.id).uniq.count
       puts "humans: #{human_participants_count}"
-      if bot_user && (user != bot_user) && (mentions_bot_name || explicit_reply_to_bot || (last_post_was_bot && human_participants_count == 1))
+
+      if bot_user && (user != bot_user) && post.post_number == 1 || (mentions_bot_name)
         opts = {
           type: POST,
           user_id: user_id,
@@ -53,7 +54,6 @@ module ::DiscourseChatbot
           over_quota: over_quota,
           message_body: post_contents.gsub(bot_username.downcase, '').gsub(bot_username, '')
         }
-        puts "3. invocation"
         job_class = ::Jobs::ChatbotReplyJob
         invoke_background_job(job_class, opts)
         true
